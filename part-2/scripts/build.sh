@@ -16,3 +16,4 @@ print_and_log "dotnet build with Release config"
 
 # builds
 dotnet build ./src/Calculator/Calculator.csproj -c Release
+dotnet build ./src/CalcWeb/CalcWeb.csproj -c Release
