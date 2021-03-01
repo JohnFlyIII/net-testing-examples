@@ -30,6 +30,7 @@ namespace CalcWebTests
             var response = await _client.PostAsJsonAsync<AddRequest>("api/calculator/add", addRequest);
             response.EnsureSuccessStatusCode();
             var addResponse = await response.Content.ReadFromJsonAsync<AddResponse>();
+
             // Assert
             Assert.Equal(3, addResponse.result);
         }
