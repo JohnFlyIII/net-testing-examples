@@ -24,6 +24,23 @@ namespace test
         }
 
         [Theory]
+        [InlineData(1,1,0)]
+        [InlineData(0,2,-2)]
+        [InlineData(4,2,2)]
+        [InlineData(9,8,1)]
+        [InlineData(10,100,-90)]
+        public void CalculatorCanSubtractTests(int lValue, int rValue, int expectedResult)
+        {   
+            // Add function should work for 1+1
+            // e.g. 1 + 1 = 2
+            var calculator = new Calculator();
+
+            var result = calculator.Subtract(lValue, rValue);
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Theory]
         [InlineData(1, 3.14)]
         [InlineData(2, 12.56)]
         public void AreaOfUnitCircle(int radius, decimal expectedResult)
