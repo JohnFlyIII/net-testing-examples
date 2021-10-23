@@ -60,5 +60,22 @@ namespace CalcWebTests
             // Assert
             Assert.Equal(expectedResult, subtractResponse.result);
         }
+
+
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(1, 3.14)]
+        public async Task AreaOfCircle(decimal radius, decimal expectedResult)
+        {
+            // Act
+            var radiusRequest = new AreaOfCircleRequest() { radius = radius };
+            var response = await _client.PostAsJsonAsync<AreaOfCircleRequest>("api/calculator/areaOfCircle", radiusRequest);
+            
+            response.EnsureSuccessStatusCode();
+            var areaOfCircleResponse = await response.Content.ReadFromJsonAsync<AreaOfCircleResponse>();
+
+            // Assert
+            Assert.Equal(expectedResult, areaOfCircleResponse.area);
+        }
     }
 }
