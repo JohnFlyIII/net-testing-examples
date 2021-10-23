@@ -57,7 +57,7 @@ body {
     font-size: 20px;
     box-shadow: none;
   }
-  
+
   #display {
     width: 265px;
     max-width: 270px;
@@ -99,6 +99,10 @@ body {
     box-shadow: none;
   }
   
+  .operator:disabled {
+    color:white;
+    background-color: gray;
+  }
   #clear {
     float: left;
     position: relative;

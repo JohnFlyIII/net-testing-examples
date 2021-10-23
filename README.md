@@ -25,11 +25,11 @@ Part 1 will focus on building a basic classs library to hold the logic for the c
 
 ## Part-2
 
-Will introduce the Web UI
+Will introduce the UI & API
 
 ## Part-3
 
-Introduce enhancements in the form of adding a database to store values of mathmatical constants so they can be updated with better or more accurate values without requiring code updates.
+Introduce "enhancements": adding a database to store values of mathmatical constants so they can be updated with better or more accurate values without requiring code updates.
 
 ## Part-4
 
