@@ -47,6 +47,64 @@ namespace CalcWeb.Controllers
 
                 return StatusCode(500, "Internal Failure");
             }
+        }
+
+        [HttpPost]
+        [Route("subtract")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(SubtractResponse), Status200OK)]
+        public IActionResult Subtract([FromBody] SubtractRequest subtractRequest)
+        {
+            try
+            {
+               var calculator = new Calculator();
+               var subtractResult = calculator.Subtract(subtractRequest.lValue, subtractRequest.rValue);
+
+               var response = new SubtractResponse()
+                                {
+                                    lValue = subtractRequest.lValue,
+                                    rValue = subtractRequest.rValue,
+                                    result = subtractResult
+                                };
+
+                return Ok(response);
+               
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failure Subtracting. {ex.ToString()}");
+
+                return StatusCode(500, "Internal Failure");
+            }
+        }
+
+
+        [HttpPost]
+        [Route("areaOfCircle")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(AreaOfCircleResponse), Status200OK)]
+        public IActionResult AreaOfCircle([FromBody] AreaOfCircleRequest areaOfCircleRequest)
+        {
+            try
+            {
+               var calculator = new Calculator();
+               var areaOfCircleResult = calculator.AreaOfACircle(areaOfCircleRequest.radius);
+
+               var response = new AreaOfCircleResponse()
+                                {
+                                    radius = areaOfCircleRequest.radius,
+                                    area = areaOfCircleResult
+                                };
+
+                return Ok(response);
+               
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failure calculating area of circle with radius {areaOfCircleRequest.radius}. {ex.ToString()}");
+
+                return StatusCode(500, "Internal Failure");
+            }
         }       
     }
 }

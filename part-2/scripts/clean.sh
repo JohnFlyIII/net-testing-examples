@@ -12,8 +12,11 @@ function print_and_log {
 
 pushd $repo_root
 
-print_and_log "dotnet build with Release config"
+print_and_log "dotnet clean Release builds"
 
-# builds
-dotnet build ./src/Calculator/Calculator.csproj -c Release
-dotnet build ./test/calculatorTests/calculatorTests.csproj -c Release
+#delete any previous distributable
+rm -rf dist
+
+dotnet clean ./src/Calculator/Calculator.csproj -c Release
+dotnet clean ./src/CalcWeb/CalcWeb.csproj -c Release
+dotnet clean ./test/calculatorTests/calculatorTests.csproj -c Release

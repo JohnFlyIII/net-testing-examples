@@ -14,9 +14,9 @@ namespace Devices
            return lValue - rValue;
        }
 
-       public double AreaOfACircle(double radius)
+       public decimal AreaOfACircle(decimal radius)
        {
-           return Constants.Pi * (radius * radius);
+           return Decimal.Multiply(Constants.Pi, Decimal.Multiply(radius, radius)); 
        }
     }
 }
