@@ -18,7 +18,7 @@ namespace CalcWebTests
         public TestServerExampleTest()
         {
             // Arrange
-            _server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+            _server = new TestServer(new WebHostBuilder().UseStartup<TestStartup>());
             _client = _server.CreateClient();
         }
 

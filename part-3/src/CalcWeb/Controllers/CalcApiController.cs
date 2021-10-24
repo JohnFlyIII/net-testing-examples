@@ -2,9 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Devices;
+using Calculator;
 using CalcWeb.Models.Api;
 using static Microsoft.AspNetCore.Http.StatusCodes;
+using Calculator.Data.Repositories.Interfaces;
 
 namespace CalcWeb.Controllers
 {
@@ -13,11 +14,16 @@ namespace CalcWeb.Controllers
     public class CalcApiController : ControllerBase
     {
         private readonly ILogger<CalcApiController> _logger;
+        private readonly IConstantsRepository _constantsRepository;
 
         public CalcApiController(
-            ILogger<CalcApiController> logger)
+            ILogger<CalcApiController> logger,
+            IConstantsRepository constantsRepository)
         {
             _logger = logger;
+            _constantsRepository = constantsRepository;
+
+            
         }
 
         [HttpPost]
@@ -28,7 +34,7 @@ namespace CalcWeb.Controllers
         {
             try
             {
-               var calculator = new Calculator();
+               var calculator = new SimpleCalculator();
                var addResult = calculator.Add(addRequest.lValue, addRequest.rValue);
 
                var response = new AddResponse()
@@ -57,7 +63,7 @@ namespace CalcWeb.Controllers
         {
             try
             {
-               var calculator = new Calculator();
+               var calculator = new SimpleCalculator();
                var subtractResult = calculator.Subtract(subtractRequest.lValue, subtractRequest.rValue);
 
                var response = new SubtractResponse()
@@ -87,7 +93,7 @@ namespace CalcWeb.Controllers
         {
             try
             {
-               var calculator = new Calculator();
+               var calculator = new SimpleCalculator();
                var areaOfCircleResult = calculator.AreaOfACircle(areaOfCircleRequest.radius);
 
                var response = new AreaOfCircleResponse()

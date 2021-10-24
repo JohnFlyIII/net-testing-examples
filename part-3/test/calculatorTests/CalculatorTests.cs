@@ -1,6 +1,6 @@
 using System;
 using Xunit;
-using Devices;
+using Calculator;
 
 namespace test
 {
@@ -16,7 +16,7 @@ namespace test
         {   
             // Add function should work for 1+1
             // e.g. 1 + 1 = 2
-            var calculator = new Calculator();
+            var calculator = new SimpleCalculator();
 
             var result = calculator.Add(lValue, rValue);
 
@@ -33,7 +33,7 @@ namespace test
         {   
             // Add function should work for 1+1
             // e.g. 1 + 1 = 2
-            var calculator = new Calculator();
+            var calculator = new SimpleCalculator();
 
             var result = calculator.Subtract(lValue, rValue);
 
@@ -46,7 +46,7 @@ namespace test
         public void AreaOfUnitCircle(int radius, decimal expectedResult)
         {
             // Unit circle is a circle with given radius
-            var calculator = new Calculator();
+            var calculator = new SimpleCalculator();
             var result = calculator.AreaOfACircle(radius);
             
             Assert.Equal(expectedResult, result);

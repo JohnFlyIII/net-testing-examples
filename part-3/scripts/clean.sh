@@ -19,4 +19,8 @@ rm -rf dist
 
 dotnet clean ./src/Calculator/Calculator.csproj -c Release
 dotnet clean ./src/CalcWeb/CalcWeb.csproj -c Release
+dotnet clean ./src/Calculator.Data/Calculator.Data.csproj -c Release
+
 dotnet clean ./test/calculatorTests/calculatorTests.csproj -c Release
+dotnet clean ./test/CalcWebTests/CalcWebTests.csproj -c Release
+dotnet clean ./test/Calculator.Data.Tests/Calculator.Data.Tests.csproj -c Release

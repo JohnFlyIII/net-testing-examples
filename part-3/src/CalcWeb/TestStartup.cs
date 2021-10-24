@@ -16,9 +16,9 @@ using Calculator.Data;
 
 namespace CalcWeb
 {
-    public class Startup
+    public class TestStartup
     {
-        public Startup(IConfiguration configuration)
+        public TestStartup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -30,28 +30,19 @@ namespace CalcWeb
         {
             services.AddControllersWithViews();
 
-            services.AddScoped<IConstantsRepository, ConstantsRepository>();
+            services.AddScoped<IConstantsRepository, FakeConstantsRepository>();
 
             ConfigurePersistance(services);
         }
 
         private void ConfigurePersistance(IServiceCollection services)
         {
-            var calculatorDbContextConnectionString = Configuration.GetConnectionString("CalculatorDb");
-            Log.Information($"Using CalculatorDb connection string of : {calculatorDbContextConnectionString}");
-
-            var persistenceProvider = Configuration["Persistence:Provider"].ToUpperInvariant();
 
             var calculatorDbOptionsBuilder = new DbContextOptionsBuilder<CalculatorDbContext>();
 
-            switch (persistenceProvider)
-            {
-                case "POSTGRES":
-                    calculatorDbOptionsBuilder.UseNpgsql(calculatorDbContextConnectionString);
-                    break;
-                default:
-                    throw new NotImplementedException($"The persistenceProvider option: '{persistenceProvider}' is unsupported");
-            }
+            var builder = new DbContextOptionsBuilder<CalculatorDbContext>();
+            var options = builder.UseSqlite("DataSource=:memory;", x => { });
+
             var calculatorDbOptions = calculatorDbOptionsBuilder.Options;
 
             services.AddScoped<DbContextOptions<CalculatorDbContext>>(_ => calculatorDbOptions);

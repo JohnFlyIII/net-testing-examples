@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Devices
+namespace Calculator
 {
-    public class Calculator
+    public class SimpleCalculator
     {
        public int Add(int lValue, int rValue)
        {

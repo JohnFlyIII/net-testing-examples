@@ -3,11 +3,14 @@ using Microsoft.Extensions.Logging.Abstractions;
 using CalcWeb.Controllers;
 using CalcWeb.Models.Api;
 using Microsoft.AspNetCore.Mvc;
+using Calculator.Data.Repositories;
 
 namespace CalcWebTests
 {
     public class CalcApiControllerTest
     {
+
+
         [Theory]
         [InlineData(1,1,2)]
         [InlineData(2,2,4)]
@@ -18,7 +21,9 @@ namespace CalcWebTests
         {
             // Arrange
             var nullLogger = new NullLogger<CalcApiController>();
-            var calcApiController = new CalcApiController(nullLogger);
+            var fakeConstantsRepository = new FakeConstantsRepository();
+
+            var calcApiController = new CalcApiController(nullLogger, fakeConstantsRepository);
 
             var addRequest = new AddRequest(){lValue =lValue, rValue = rValue};
 
