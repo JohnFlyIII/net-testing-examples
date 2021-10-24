@@ -22,8 +22,6 @@ namespace CalcWeb.Controllers
         {
             _logger = logger;
             _constantsRepository = constantsRepository;
-
-            
         }
 
         [HttpPost]
@@ -89,10 +87,19 @@ namespace CalcWeb.Controllers
         [Route("areaOfCircle")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(AreaOfCircleResponse), Status200OK)]
-        public IActionResult AreaOfCircle([FromBody] AreaOfCircleRequest areaOfCircleRequest)
+        public async Task<IActionResult> AreaOfCircle([FromBody] AreaOfCircleRequest areaOfCircleRequest)
         {
             try
             {
+               var pi = await _constantsRepository.GetConstant("pi").ConfigureAwait(false);
+               if(pi != null && !string.IsNullOrWhiteSpace(pi.Value))
+               {
+                    decimal piValue;
+                    if(decimal.TryParse(pi.Value, out piValue))
+                    {
+                        Constants.Pi = piValue;
+                    }
+               }
                var calculator = new SimpleCalculator();
                var areaOfCircleResult = calculator.AreaOfACircle(areaOfCircleRequest.radius);
 
