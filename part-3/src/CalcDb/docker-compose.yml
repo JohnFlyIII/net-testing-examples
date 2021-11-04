@@ -1,0 +1,39 @@
+version: "3"
+services:
+  flyway:
+    image: flyway/flyway
+    container_name: flyway01
+    hostname: flyway01
+    #entrypoint: tail -F anything
+    command: -url=jdbc:postgresql://pg01:5432/calcdb -locations="filesystem:./sql" -schemas=public -user=postgres -password=postgres migrate
+    volumes:
+      - ./migration:/flyway/sql
+    depends_on:
+      pgdatabase:
+        condition: service_healthy
+    networks:
+      - nettesting-network
+  pgdatabase:
+    image: postgres
+    container_name: pg01
+    hostname: pg01
+    volumes:
+      - data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=calcdb
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-U", "postgres"]
+      interval: 5s
+      timeout: 1s
+      retries: 2   
+    networks:
+      - nettesting-network
+networks:
+    nettesting-network:
+       driver: bridge   
+volumes:
+  data:
