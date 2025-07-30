@@ -25,9 +25,11 @@ namespace CalcWebTests
             // Act
             var iActionResult = calcApiController.Add(addRequest);
             var okObjectResult = iActionResult as OkObjectResult;
-            var addResponse = okObjectResult.Value as AddResponse;
+            var addResponse = okObjectResult?.Value as AddResponse;
 
             // Assert
+            Assert.NotNull(okObjectResult);
+            Assert.NotNull(addResponse);
             Assert.Equal(expectedResult, addResponse.result);
         }
     }

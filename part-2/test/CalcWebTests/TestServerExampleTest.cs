@@ -38,6 +38,7 @@ namespace CalcWebTests
             var addResponse = await response.Content.ReadFromJsonAsync<AddResponse>();
 
             // Assert
+            Assert.NotNull(addResponse);
             Assert.Equal(expectedResult, addResponse.result);
         }
 
@@ -58,6 +59,7 @@ namespace CalcWebTests
             var subtractResponse = await response.Content.ReadFromJsonAsync<SubtractResponse>();
 
             // Assert
+            Assert.NotNull(subtractResponse);
             Assert.Equal(expectedResult, subtractResponse.result);
         }
 
@@ -75,6 +77,7 @@ namespace CalcWebTests
             var areaOfCircleResponse = await response.Content.ReadFromJsonAsync<AreaOfCircleResponse>();
 
             // Assert
+            Assert.NotNull(areaOfCircleResponse);
             Assert.Equal(expectedResult, areaOfCircleResponse.area);
         }
     }
